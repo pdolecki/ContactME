@@ -1,1 +1,80 @@
-<p>Signup component</p>
+<div class="background">
+  <div class="container">
+    <mat-card-title class="title">ContactME</mat-card-title>
+    <mat-card class="card">
+      <div class="avatar">
+        <mat-icon class="avatar-icon">person</mat-icon>
+        <h2 class="avatar-title">SIGN UP</h2>
+      </div>
+      <form class="form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>E-mail:</mat-label>
+          <input
+            type="email"
+            autocomplete="off"
+            formControlName="email"
+            matInput
+            #email
+          />
+          <button
+            *ngIf="email.value"
+            type="button"
+            (click)="clearFormControl(email)"
+            matSuffix
+            mat-icon-button
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-error
+            *ngIf="this.signupForm.get('email')?.errors?.['required'] || this.signupForm.get('email')?.errors?.['email']"
+            >You need to provide an email!</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>Password:</mat-label>
+          <input
+            type="password"
+            autocomplete="off"
+            formControlName="password"
+            matInput
+            #password
+          />
+          <button
+            *ngIf="password.value"
+            type="button"
+            (click)="clearFormControl(password)"
+            matSuffix
+            mat-icon-button
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-error
+            *ngIf="this.signupForm.get('password')?.errors?.['required']"
+            >You need to provide a password!</mat-error
+          >
+          <mat-error
+            *ngIf="this.signupForm.get('password')?.errors?.['minlength']"
+            >Password must be at least 10 characters long!</mat-error
+          >
+        </mat-form-field>
+        <button
+          color="accent"
+          type="submit"
+          class="submit-button"
+          mat-raised-button
+        >
+          REGISTER
+        </button>
+      </form>
+      <mat-card-footer>
+        <mat-progress-bar
+          color="accent"
+          mode="indeterminate"
+        ></mat-progress-bar>
+      </mat-card-footer>
+    </mat-card>
+    <button class="redirect" routerLink="/login">
+      Already have an account? Click here to log in!
+    </button>
+  </div>
+</div>

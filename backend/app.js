@@ -32,6 +32,7 @@ app.use((req, res, next) => {
 
   next();
 });
+
 app.use("/api/contacts", contactsRoutes);
 app.use("/api", userRoutes);
 

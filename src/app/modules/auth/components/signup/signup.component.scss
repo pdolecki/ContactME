@@ -1,0 +1,89 @@
+.background {
+  height: 100vh;
+  background: #ffd9e5;
+  background-color: #ff407b;
+  background: linear-gradient(
+    to bottom,
+    #ff407b 0%,
+    #ff407b 40%,
+    #f0f0f0 40%,
+    #f0f0f0 100%
+  );
+  position: relative;
+  text-align: center;
+  overflow: auto;
+}
+.container {
+  display: block;
+  margin: 15vh auto;
+  width: 50vw;
+  height: 50vh;
+  max-width: 750px;
+  .title {
+    font-size: 2rem;
+    letter-spacing: 1px;
+    color: #fff;
+    padding-bottom: 20px;
+  }
+  .card {
+    height: 100%;
+    width: 100%;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .avatar {
+      margin: 0 auto;
+      margin-top: 20px;
+      width: 10vh;
+      height: 10vh;
+      border-radius: 50%;
+      background-color: #ff407b;
+      &-icon {
+        font-size: 9vh;
+        height: 9vh;
+        width: 9vh;
+        color: #fff;
+      }
+      &-title {
+        margin-top: 1vh;
+        font-weight: 300;
+        letter-spacing: 1px;
+        font-size: 1.4rem;
+      }
+    }
+    .form {
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+      width: 75%;
+      margin-top: 50px;
+      .submit-button {
+        width: 30%;
+        min-width: fit-content;
+        margin: 0 auto;
+        margin-top: 4vh;
+        letter-spacing: 1px;
+        font-size: 1rem;
+        font-weight: 400;
+      }
+    }
+  }
+  .redirect {
+    width: fit-content;
+    margin: 10px auto;
+    border: none;
+    outline: none;
+    margin-bottom: -10vh;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    font-weight: 500;
+    color: #ff407b;
+    text-decoration: underline 1px solid #ff407b;
+    &:hover {
+      cursor: pointer;
+      letter-spacing: 3px;
+      transition: letter-spacing 0.2s ease-in-out;
+    }
+  }
+}

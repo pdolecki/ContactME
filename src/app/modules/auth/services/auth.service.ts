@@ -12,12 +12,12 @@ export class AuthService {
 
   constructor(private router: Router, private apiService: ApiService) {}
 
-  get jwtToken(): string {
-    return this.jwtToken || '';
+  get jwtToken(): string | null {
+    return this.token;
   }
 
-  get userId(): string {
-    return this.loggedUserId || '';
+  get userId(): string | null {
+    return this.loggedUserId;
   }
 
   createUser(email: string, password: string) {

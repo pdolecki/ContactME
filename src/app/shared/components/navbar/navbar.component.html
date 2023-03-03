@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" *ngIf="authService.isUserAuthenticated$ | async">
   <span class="title">ContactME</span>
   <span class="spacer"></span>
   <button mat-icon-button [matMenuTriggerFor]="menu">
