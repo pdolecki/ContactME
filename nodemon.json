@@ -1,0 +1,7 @@
+{
+  "env": {
+    "MONGO_ATLAS_PSW": "super_secure_database_password",
+    "JWT_HASH": "super_secure_jwt_secret_hash",
+    "JWT_TIME": "6000000"
+  }
+}
