@@ -1,22 +1,29 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-
-import { NavbarComponent } from './navbar/navbar.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TableComponent } from './table/table.component';
+import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+
+import { NavbarComponent } from './navbar/navbar.component';
+import { TableComponent } from './table/table.component';
 import { DeleteComponent } from './delete/delete.component';
+import { CreateComponent } from './create/create.component';
 
 @NgModule({
-  declarations: [NavbarComponent, TableComponent, DeleteComponent],
+  declarations: [
+    NavbarComponent,
+    TableComponent,
+    CreateComponent,
+    DeleteComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -29,7 +36,8 @@ import { DeleteComponent } from './delete/delete.component';
     MatFormFieldModule,
     MatDialogModule,
     MatTableModule,
+    MatInputModule,
   ],
-  exports: [NavbarComponent, TableComponent, DeleteComponent],
+  exports: [NavbarComponent, TableComponent, CreateComponent, DeleteComponent],
 })
 export class ComponentsModule {}

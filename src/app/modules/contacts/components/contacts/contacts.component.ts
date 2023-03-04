@@ -8,6 +8,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { take } from 'rxjs';
+import { CreateComponent } from 'src/app/shared/components/create/create.component';
 import { DeleteComponent } from 'src/app/shared/components/delete/delete.component';
 import { Contact } from 'src/app/shared/models';
 import { ContactsService } from '../../services/contacts.service';
@@ -57,6 +58,21 @@ export class ContactsComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.contacts);
         this.cdr.detectChanges();
       });
+  }
+
+  public openCreateDialog(): void {
+    const dialogRef = this.matDialog.open(CreateComponent);
+
+    dialogRef.afterClosed().subscribe((newContact) => {
+      if (!newContact) return;
+      this.contactsService.createContact(newContact).subscribe((res) => {
+        if (res instanceof HttpErrorResponse) {
+          return console.log('ERROR');
+        }
+        console.log('creation success!');
+        this.fetchContactsData();
+      });
+    });
   }
 
   public openEditDialog(contactId: Pick<Contact, '_id'>): void {

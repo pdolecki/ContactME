@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import {
   GetContactsResponse,
   DeleteContactResponse,
+  Contact,
+  CreateContactResponse,
 } from 'src/app/shared/models';
 import { ApiService } from 'src/app/shared/services/api.service';
 
@@ -15,6 +17,12 @@ export class ContactsService {
 
   getContacts(): Observable<GetContactsResponse | HttpErrorResponse> {
     return this.apiService.get('contacts');
+  }
+
+  createContact(
+    contact: Partial<Contact>
+  ): Observable<CreateContactResponse | HttpErrorResponse> {
+    return this.apiService.post('contacts', { ...contact });
   }
 
   deleteContact(

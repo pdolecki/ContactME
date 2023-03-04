@@ -15,7 +15,11 @@
   </ng-container>
 
   <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef class="actions-th"></th>
+    <th mat-header-cell *matHeaderCellDef class="actions-th">
+      <button mat-raised-button color="primary" (click)="onCreate()">
+        Add new contact
+      </button>
+    </th>
     <td mat-cell *matCellDef="let element" class="actions-td">
       <button
         mat-icon-button
