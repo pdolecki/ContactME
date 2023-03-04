@@ -27,6 +27,6 @@ export class ContactsService {
 
   getContacts(): Observable<GetContacts | HttpErrorResponse> {
     console.log('getContacts');
-    return this.apiService.get('/contacts');
+    return this.apiService.get('contacts');
   }
 }

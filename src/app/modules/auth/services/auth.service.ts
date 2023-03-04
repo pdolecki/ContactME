@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   createUser(email: string, password: string) {
-    return this.apiService.post('/signup', { email, password }).subscribe(
+    return this.apiService.post('signup', { email, password }).subscribe(
       () => {
         this.router.navigate(['/user/created']);
       },
@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    this.apiService.post('/login', { email, password }).subscribe(
+    this.apiService.post('login', { email, password }).subscribe(
       (response) => {
         if (!response.token) return;
 
