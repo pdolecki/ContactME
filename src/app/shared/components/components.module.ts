@@ -9,9 +9,13 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TableComponent } from './table/table.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
-  declarations: [NavbarComponent],
+  declarations: [NavbarComponent, TableComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -21,7 +25,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatMenuModule,
     MatButtonModule,
     MatIconModule,
+    MatFormFieldModule,
+    MatDialogModule,
+    MatTableModule,
   ],
-  exports: [NavbarComponent],
+  exports: [NavbarComponent, TableComponent],
 })
 export class ComponentsModule {}

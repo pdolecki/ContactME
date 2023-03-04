@@ -5,11 +5,41 @@ import { RouterModule } from '@angular/router';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { ContactAddComponent } from './components/contact-add/contact-add.component';
 import { ContactEditComponent } from './components/contact-edit/contact-edit.component';
+import { ContactDeleteComponent } from './components/contact-delete/contact-delete.component';
 import { ContactsRoutingModule } from './contacts-routing.module';
 
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ComponentsModule } from 'src/app/shared/components/components.module';
+
 @NgModule({
-  declarations: [ContactsComponent, ContactAddComponent, ContactEditComponent],
-  imports: [CommonModule, RouterModule, ContactsRoutingModule],
-  exports: [ContactsComponent, ContactAddComponent, ContactEditComponent],
+  declarations: [
+    ContactsComponent,
+    ContactAddComponent,
+    ContactEditComponent,
+    ContactDeleteComponent,
+  ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    ContactsRoutingModule,
+    ComponentsModule,
+    MatTableModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+  ],
+  exports: [
+    ContactsComponent,
+    ContactAddComponent,
+    ContactEditComponent,
+    ContactDeleteComponent,
+  ],
 })
 export class ContactsModule {}

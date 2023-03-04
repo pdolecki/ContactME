@@ -1,1 +1,17 @@
-<p>contacts-component</p>
+<div class="container">
+  <mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ex. Jan Kowalsky"
+      #input
+    />
+  </mat-form-field>
+
+  <cme-table
+    [dataSource]="dataSource"
+    [displayedColumns]="displayedColumns"
+    [filterValue]="input.value"
+  ></cme-table>
+</div>
