@@ -12,14 +12,7 @@ export class CreateComponent {
   phoneNumber!: string;
   email!: string;
 
-  constructor(
-    public dialogRef: MatDialogRef<CreateComponent>,
-    @Inject(MAT_DIALOG_DATA)
-    public data: {
-      name: string;
-      fields: string[];
-    }
-  ) {}
+  constructor(public dialogRef: MatDialogRef<CreateComponent>) {}
 
   public onCreate(creationForm: any): void {
     this.dialogRef.close(creationForm.value);

@@ -16,12 +16,14 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { TableComponent } from './table/table.component';
 import { DeleteComponent } from './delete/delete.component';
 import { CreateComponent } from './create/create.component';
+import { EditComponent } from './edit/edit.component';
 
 @NgModule({
   declarations: [
     NavbarComponent,
     TableComponent,
     CreateComponent,
+    EditComponent,
     DeleteComponent,
   ],
   imports: [
@@ -38,6 +40,12 @@ import { CreateComponent } from './create/create.component';
     MatTableModule,
     MatInputModule,
   ],
-  exports: [NavbarComponent, TableComponent, CreateComponent, DeleteComponent],
+  exports: [
+    NavbarComponent,
+    TableComponent,
+    CreateComponent,
+    EditComponent,
+    DeleteComponent,
+  ],
 })
 export class ComponentsModule {}

@@ -10,9 +10,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { take } from 'rxjs';
 import { CreateComponent } from 'src/app/shared/components/create/create.component';
 import { DeleteComponent } from 'src/app/shared/components/delete/delete.component';
+import { EditComponent } from 'src/app/shared/components/edit/edit.component';
 import { Contact } from 'src/app/shared/models';
 import { ContactsService } from '../../services/contacts.service';
-import { ContactEditComponent } from '../contact-edit/contact-edit.component';
 
 @Component({
   selector: 'cme-contacts',
@@ -80,12 +80,21 @@ export class ContactsComponent implements OnInit {
       (contact) => contact._id === String(contactId)
     );
 
-    const dialogRef = this.matDialog.open(ContactEditComponent, {
+    const dialogRef = this.matDialog.open(EditComponent, {
       data: { contact },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (!result) return;
+    dialogRef.afterClosed().subscribe((updatedContact) => {
+      if (!updatedContact || !contact) return;
+      this.contactsService
+        .updateContact({ id: contact._id, ...updatedContact })
+        .subscribe((res) => {
+          if (res instanceof HttpErrorResponse) {
+            return console.log('ERROR');
+          }
+          console.log('update success!');
+          this.fetchContactsData();
+        });
     });
   }
 

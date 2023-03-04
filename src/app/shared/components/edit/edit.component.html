@@ -1,0 +1,50 @@
+<h2 mat-dialog-title>Update record</h2>
+<div mat-dialog-content>
+  <form #updateForm="ngForm">
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Name"
+        [(ngModel)]="name"
+        name="name"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Phone Number"
+        [(ngModel)]="phoneNumber"
+        name="phoneNumber"
+        pattern="^\+48\s\d{3}\s\d{3}\s\d{3}$"
+        required
+      />
+      <mat-hint>Format: +48 XXX XXX XXX</mat-hint>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Email"
+        [(ngModel)]="email"
+        name="email"
+        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+        required
+      />
+      <mat-hint>Format: example@example.com</mat-hint>
+    </mat-form-field>
+  </form>
+</div>
+<p>Do you want to update record?</p>
+<div class="cta">
+  <button mat-stroked-button color="primary" (click)="onUpdate(updateForm)">
+    Update
+  </button>
+  <button
+    mat-stroked-button
+    color="secondary"
+    (click)="onCancel()"
+    class="btn-primary"
+  >
+    Cancel
+  </button>
+</div>

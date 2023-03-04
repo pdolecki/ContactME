@@ -6,6 +6,7 @@ import {
   DeleteContactResponse,
   Contact,
   CreateContactResponse,
+  UpdateContactResponse,
 } from 'src/app/shared/models';
 import { ApiService } from 'src/app/shared/services/api.service';
 
@@ -23,6 +24,15 @@ export class ContactsService {
     contact: Partial<Contact>
   ): Observable<CreateContactResponse | HttpErrorResponse> {
     return this.apiService.post('contacts', { ...contact });
+  }
+
+  updateContact(contact: {
+    id: string;
+    email: string;
+    name: string;
+    phoneNumber: string;
+  }): Observable<UpdateContactResponse | HttpErrorResponse> {
+    return this.apiService.put(`contacts/${contact.id}`, { ...contact });
   }
 
   deleteContact(
