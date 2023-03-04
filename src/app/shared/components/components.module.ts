@@ -13,9 +13,10 @@ import { TableComponent } from './table/table.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
+import { DeleteComponent } from './delete/delete.component';
 
 @NgModule({
-  declarations: [NavbarComponent, TableComponent],
+  declarations: [NavbarComponent, TableComponent, DeleteComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -29,6 +30,6 @@ import { MatTableModule } from '@angular/material/table';
     MatDialogModule,
     MatTableModule,
   ],
-  exports: [NavbarComponent, TableComponent],
+  exports: [NavbarComponent, TableComponent, DeleteComponent],
 })
 export class ComponentsModule {}

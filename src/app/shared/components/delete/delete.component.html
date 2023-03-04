@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>Delete {{ data.name }}?</h2>
+<div mat-dialog-content>
+  <ul *ngFor="let field of data.fields">
+    <li *ngFor="let prop of field | keyvalue">
+      {{ prop.key }}: <span>{{ prop.value }}</span>
+    </li>
+  </ul>
+  <p>Deletion of record is permanent, delete?</p>
+</div>
+<div class="cta">
+  <button mat-stroked-button color="warn" (click)="onDelete()">Yes</button>
+  <button
+    mat-stroked-button
+    color="primary"
+    (click)="onCancel()"
+    class="btn-primary"
+  >
+    No
+  </button>
+</div>

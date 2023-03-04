@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { ContactAddComponent } from './components/contact-add/contact-add.component';
 import { ContactEditComponent } from './components/contact-edit/contact-edit.component';
-import { ContactDeleteComponent } from './components/contact-delete/contact-delete.component';
 import { ContactsRoutingModule } from './contacts-routing.module';
 
 import { MatTableModule } from '@angular/material/table';
@@ -17,12 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ComponentsModule } from 'src/app/shared/components/components.module';
 
 @NgModule({
-  declarations: [
-    ContactsComponent,
-    ContactAddComponent,
-    ContactEditComponent,
-    ContactDeleteComponent,
-  ],
+  declarations: [ContactsComponent, ContactAddComponent, ContactEditComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -35,11 +29,6 @@ import { ComponentsModule } from 'src/app/shared/components/components.module';
     MatFormFieldModule,
     MatInputModule,
   ],
-  exports: [
-    ContactsComponent,
-    ContactAddComponent,
-    ContactEditComponent,
-    ContactDeleteComponent,
-  ],
+  exports: [ContactsComponent, ContactAddComponent, ContactEditComponent],
 })
 export class ContactsModule {}

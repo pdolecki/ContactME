@@ -5,10 +5,13 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { take } from 'rxjs';
+import { DeleteComponent } from 'src/app/shared/components/delete/delete.component';
 import { Contact } from 'src/app/shared/models';
 import { ContactsService } from '../../services/contacts.service';
+import { ContactEditComponent } from '../contact-edit/contact-edit.component';
 
 @Component({
   selector: 'cme-contacts',
@@ -29,6 +32,7 @@ export class ContactsComponent implements OnInit {
 
   constructor(
     private contactsService: ContactsService,
+    private matDialog: MatDialog,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -49,5 +53,39 @@ export class ContactsComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.contacts);
         this.cdr.detectChanges();
       });
+  }
+
+  public openEditDialog(contactId: Pick<Contact, '_id'>): void {
+    const contact = this.contacts.find(
+      (contact) => contact._id === String(contactId)
+    );
+
+    const dialogRef = this.matDialog.open(ContactEditComponent, {
+      data: { contact },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!result) return;
+    });
+  }
+  public openDeleteDialog(contactId: Pick<Contact, '_id'>): void {
+    const contact = this.contacts.find(
+      (contact) => contact._id === String(contactId)
+    );
+
+    const dialogRef = this.matDialog.open(DeleteComponent, {
+      data: {
+        name: contact?.name,
+        fields: [
+          { email: contact?.email },
+          { phoneNumber: contact?.phoneNumber },
+        ],
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!result) return;
+      console.log('yes');
+    });
   }
 }
