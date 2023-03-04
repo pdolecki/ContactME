@@ -42,6 +42,10 @@ export class ContactsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fetchContactsData();
+  }
+
+  private fetchContactsData(): void {
     this.contactsService
       .getContacts()
       .pipe(take(1))
@@ -68,6 +72,7 @@ export class ContactsComponent implements OnInit {
       if (!result) return;
     });
   }
+
   public openDeleteDialog(contactId: Pick<Contact, '_id'>): void {
     const contact = this.contacts.find(
       (contact) => contact._id === String(contactId)
@@ -84,8 +89,14 @@ export class ContactsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (!result) return;
-      console.log('yes');
+      if (!result || !contact) return;
+      this.contactsService.deleteContact(contact._id).subscribe((res) => {
+        if (res instanceof HttpErrorResponse) {
+          return console.log('ERROR');
+        }
+        console.log('deletetion success!');
+        this.fetchContactsData();
+      });
     });
   }
 }
