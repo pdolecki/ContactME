@@ -1,10 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { AuthGuard } from './modules/auth/guards/auth.guard';
+import { ContactsComponent } from './modules/contacts/components/contacts/contacts.component';
 
 const routes: Routes = [
-  { path: '', component: AppComponent, canActivate: [AuthGuard] },
+  // { path: 'contacts', component: ContactsComponent, canActivate: [AuthGuard] },
+  {
+    path: 'contacts',
+    loadChildren: () =>
+      import('./modules/contacts/contacts.module').then(
+        (m) => m.ContactsModule
+      ),
+    canActivate: [AuthGuard],
+  },
   {
     path: 'auth',
     loadChildren: () =>
@@ -12,7 +20,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '',
+    redirectTo: 'contacts',
   },
 ];
 
