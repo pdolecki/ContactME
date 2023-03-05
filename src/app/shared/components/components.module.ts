@@ -18,6 +18,7 @@ import { DeleteComponent } from './delete/delete.component';
 import { CreateComponent } from './create/create.component';
 import { EditComponent } from './edit/edit.component';
 import { MatSortModule } from '@angular/material/sort';
+import { InputComponent } from './input/input.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { MatSortModule } from '@angular/material/sort';
     CreateComponent,
     EditComponent,
     DeleteComponent,
+    InputComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +50,7 @@ import { MatSortModule } from '@angular/material/sort';
     CreateComponent,
     EditComponent,
     DeleteComponent,
+    InputComponent,
   ],
 })
 export class ComponentsModule {}

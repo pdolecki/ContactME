@@ -1,0 +1,31 @@
+<mat-form-field appearance="outline">
+  <mat-label>{{ label }}</mat-label>
+  <input
+    type="{{ type }}"
+    autocomplete="off"
+    [formControl]="control"
+    matInput
+    #input
+  />
+  <button
+    *ngIf="input.value"
+    type="button"
+    (click)="clearInput()"
+    matSuffix
+    mat-icon-button
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+  <mat-error *ngIf="control.errors?.['required'] ">
+    This field is required
+  </mat-error>
+  <mat-error *ngIf="control.errors?.['email']">
+    You need to provide a valid email
+  </mat-error>
+  <mat-error *ngIf="control.errors?.['pattern']">
+    Provided format is invalid (XXX XXX XXX)
+  </mat-error>
+  <mat-error *ngIf="control.errors?.['minlength']">
+    Password must be at least 8 characters long
+  </mat-error>
+</mat-form-field>

@@ -1,5 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -34,10 +39,7 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  clearFormControl(formControlRef: HTMLInputElement): void {
-    const formControlName = formControlRef.getAttribute('formControlName');
-    if (!formControlName) return;
-    this.loginForm.get(formControlName)?.setValue(null);
-    formControlRef.value = '';
+  getFormControl(formControlName: string): FormControl {
+    return this.loginForm.get(formControlName) as FormControl;
   }
 }

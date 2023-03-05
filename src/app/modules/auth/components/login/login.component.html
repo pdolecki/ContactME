@@ -7,52 +7,16 @@
         <h2 class="avatar-title">LOGIN</h2>
       </div>
       <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <mat-form-field appearance="outline">
-          <mat-label>E-mail:</mat-label>
-          <input
-            type="email"
-            autocomplete="off"
-            formControlName="email"
-            matInput
-            #email
-          />
-          <button
-            *ngIf="email.value"
-            type="button"
-            (click)="clearFormControl(email)"
-            matSuffix
-            mat-icon-button
-          >
-            <mat-icon>close</mat-icon>
-          </button>
-          <mat-error
-            *ngIf="this.loginForm.get('email')?.errors?.['required'] || this.loginForm.get('email')?.errors?.['email']"
-            >You need to provide an email!</mat-error
-          >
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Password:</mat-label>
-          <input
-            type="password"
-            autocomplete="off"
-            formControlName="password"
-            matInput
-            #password
-          />
-          <button
-            *ngIf="password.value"
-            type="button"
-            (click)="clearFormControl(password)"
-            matSuffix
-            mat-icon-button
-          >
-            <mat-icon>close</mat-icon>
-          </button>
-          <mat-error
-            *ngIf="this.loginForm.get('password')?.errors?.['required']"
-            >You need to provide a password!</mat-error
-          >
-        </mat-form-field>
+        <cme-input
+          label="E-mail"
+          type="email"
+          [control]="getFormControl('email')"
+        ></cme-input>
+        <cme-input
+          label="Password"
+          type="password"
+          [control]="getFormControl('password')"
+        ></cme-input>
         <button
           color="primary"
           type="submit"

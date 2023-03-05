@@ -1,5 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -24,7 +29,7 @@ export class SignupComponent implements OnInit {
       ],
       password: [
         null,
-        Validators.compose([Validators.required, Validators.minLength(10)]),
+        Validators.compose([Validators.required, Validators.minLength(8)]),
       ],
     });
   }
@@ -37,10 +42,7 @@ export class SignupComponent implements OnInit {
     );
   }
 
-  clearFormControl(formControlRef: HTMLInputElement): void {
-    const formControlName = formControlRef.getAttribute('formControlName');
-    if (!formControlName) return;
-    this.signupForm.get(formControlName)?.setValue(null);
-    formControlRef.value = '';
+  getFormControl(formControlName: string): FormControl {
+    return this.signupForm.get(formControlName) as FormControl;
   }
 }

@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { ComponentsModule } from 'src/app/shared/components/components.module';
 
 @NgModule({
   declarations: [LoginComponent, SignupComponent],
@@ -29,6 +30,7 @@ import { SignupComponent } from './components/signup/signup.component';
     MatProgressBarModule,
     MatFormFieldModule,
     MatInputModule,
+    ComponentsModule,
   ],
   exports: [LoginComponent, SignupComponent],
 })
