@@ -10,74 +10,24 @@
   </div>
   <div class="panel">
     <form class="panel-form" [formGroup]="creationForm" (ngSubmit)="onSubmit()">
-      <mat-form-field appearance="outline" class="panel-form--field">
-        <mat-label>Name</mat-label>
-        <input
-          type="text"
-          autocomplete="off"
-          formControlName="name"
-          matInput
-          #name
-        />
-        <button
-          *ngIf="name.value"
-          type="button"
-          (click)="clearFormControl(name)"
-          matSuffix
-          mat-icon-button
-        >
-          <mat-icon>close</mat-icon>
-        </button>
-        <mat-error *ngIf="this.creationForm.get('name')?.errors?.['required']"
-          >You need to provide a name!</mat-error
-        >
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="panel-form--field">
-        <mat-label>Email</mat-label>
-        <input
-          type="text"
-          autocomplete="off"
-          formControlName="email"
-          matInput
-          #email
-        />
-        <button
-          *ngIf="email.value"
-          type="button"
-          (click)="clearFormControl(email)"
-          matSuffix
-          mat-icon-button
-        >
-          <mat-icon>close</mat-icon>
-        </button>
-        <mat-error
-          *ngIf="this.creationForm.get('email')?.errors?.['required'] || this.creationForm.get('email')?.errors?.['pattern']"
-          >You need to provide an email!</mat-error
-        >
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="panel-form--field">
-        <mat-label>Phone Number</mat-label>
-        <input
-          type="text"
-          autocomplete="off"
-          formControlName="phoneNumber"
-          matInput
-          #phoneNumber
-        />
-        <button
-          *ngIf="phoneNumber.value"
-          type="button"
-          (click)="clearFormControl(phoneNumber)"
-          matSuffix
-          mat-icon-button
-        >
-          <mat-icon>close</mat-icon>
-        </button>
-        <mat-error
-          *ngIf="this.creationForm.get('phoneNumber')?.errors?.['required'] || this.creationForm.get('phoneNumber')?.errors?.['pattern']"
-          >You need to provide a phoneNumber!</mat-error
-        >
-      </mat-form-field>
+      <cme-input
+        label="Name"
+        type="text"
+        [control]="getFormControl('name')"
+        class="panel-form--field"
+      ></cme-input>
+      <cme-input
+        label="Email"
+        type="email"
+        [control]="getFormControl('email')"
+        class="panel-form--field"
+      ></cme-input>
+      <cme-input
+        label="Phone Number"
+        type="phoneNumber"
+        [control]="getFormControl('phoneNumber')"
+        class="panel-form--field"
+      ></cme-input>
       <button
         class="panel-cta--btn"
         type="submit"

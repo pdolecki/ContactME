@@ -1,52 +1,37 @@
 <h2 mat-dialog-title>Create new record</h2>
 <div mat-dialog-content>
-  <form #creationForm="ngForm">
-    <mat-form-field>
-      <input
-        matInput
-        placeholder="Name"
-        [(ngModel)]="name"
-        name="name"
-        required
-      />
-    </mat-form-field>
-
-    <mat-form-field>
-      <input
-        matInput
-        placeholder="Phone Number"
-        [(ngModel)]="phoneNumber"
-        name="phoneNumber"
-        pattern="^\+48\s\d{3}\s\d{3}\s\d{3}$"
-        required
-      />
-      <mat-hint>Format: +48 XXX XXX XXX</mat-hint>
-    </mat-form-field>
-
-    <mat-form-field>
-      <input
-        matInput
-        placeholder="Email"
-        [(ngModel)]="email"
-        name="email"
-        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-        required
-      />
-      <mat-hint>Format: example@example.com</mat-hint>
-    </mat-form-field>
+  <form [formGroup]="creationForm" (ngSubmit)="onCreate()">
+    <cme-input
+      label="Name"
+      type="text"
+      [control]="getFormControl('name')"
+      class="panel-form--field"
+    ></cme-input>
+    <cme-input
+      label="Email"
+      type="email"
+      [control]="getFormControl('email')"
+      class="panel-form--field"
+    ></cme-input>
+    <cme-input
+      label="Phone Number"
+      type="phoneNumber"
+      [control]="getFormControl('phoneNumber')"
+      class="panel-form--field"
+    ></cme-input>
   </form>
 </div>
 <p *ngIf="creationForm.valid; else formInvalid">
   Do you want to create a new record?
 </p>
 <ng-template #formInvalid>
-  <p>You need to fill the creationForm to proceed.</p>
+  <p>You need to fill the form to proceed.</p>
 </ng-template>
 <div class="cta">
   <button
     mat-stroked-button
     color="primary"
-    (click)="onCreate(creationForm)"
+    type="submit"
     [disabled]="creationForm.invalid"
   >
     Create

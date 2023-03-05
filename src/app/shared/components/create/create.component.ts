@@ -1,5 +1,11 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'cme-create',
@@ -7,15 +13,37 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./create.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateComponent {
-  name!: string;
-  phoneNumber!: string;
-  email!: string;
+export class CreateComponent implements OnInit {
+  creationForm!: FormGroup;
 
-  constructor(public dialogRef: MatDialogRef<CreateComponent>) {}
+  constructor(
+    private dialogRef: MatDialogRef<CreateComponent>,
+    private formBuilder: FormBuilder
+  ) {}
 
-  public onCreate(creationForm: any): void {
-    this.dialogRef.close(creationForm.value);
+  ngOnInit(): void {
+    this.creationForm = this.formBuilder.group({
+      name: [null, Validators.required],
+      email: [
+        null,
+        Validators.compose([Validators.required, Validators.email]),
+      ],
+      phoneNumber: [
+        null,
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(`^(\\+48\\s)?\\d{3}([-\\s])?\\d{3}\\2?\\d{3}$`),
+        ]),
+      ],
+    });
+  }
+
+  getFormControl(formControlName: string): FormControl {
+    return this.creationForm.get(formControlName) as FormControl;
+  }
+
+  public onCreate(): void {
+    this.dialogRef.close(this.creationForm.value);
   }
 
   public onCancel(): void {

@@ -77,24 +77,6 @@ exports.deleteContact = (req, res, next) => {
     });
 };
 
-exports.getContact = (req, res, next) => {
-  Contact.findById(req.params.id)
-    .then((contact) => {
-      if (contact) {
-        res
-          .status(RESPONSE_CODE.OK)
-          .json({ message: RESPONSE_MESSAGE.SUCCESS, contact });
-      } else {
-        res.status(RESPONSE_CODE.NOT_FOUND).json({ message: NOT_FOUND });
-      }
-    })
-    .catch((error) => {
-      res.status(RESPONSE_CODE.SERVER_ERROR).json({
-        message: RESPONSE_MESSAGE.SERVER_ERROR,
-      });
-    });
-};
-
 exports.getContacts = (req, res, next) => {
   const queryParams = {
     creator: req.userData.userId,

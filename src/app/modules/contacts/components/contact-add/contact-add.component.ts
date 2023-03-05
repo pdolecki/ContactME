@@ -1,6 +1,16 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  OnInit,
+  ChangeDetectorRef,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ContactsService } from '../../services/contacts.service';
 
 @Component({
@@ -14,7 +24,8 @@ export class ContactAddComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private contactsService: ContactsService
+    private contactsService: ContactsService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -22,10 +33,7 @@ export class ContactAddComponent implements OnInit {
       name: [null, Validators.required],
       email: [
         null,
-        Validators.compose([
-          Validators.required,
-          Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/),
-        ]),
+        Validators.compose([Validators.required, Validators.email]),
       ],
       phoneNumber: [
         null,
@@ -37,16 +45,8 @@ export class ContactAddComponent implements OnInit {
     });
   }
 
-  public clearFormControl(formControlRef: HTMLInputElement): void {
-    const formControlName = formControlRef.getAttribute('formControlName');
-    if (!formControlName) return;
-    this.creationForm.get(formControlName)?.setValue(null);
-    formControlRef.value = '';
-  }
-
   public onSubmit(): void {
     if (this.creationForm.invalid) return;
-    console.log(this.creationForm.value);
     this.contactsService
       .createContact(this.creationForm.value)
       .subscribe((res) => {
@@ -55,5 +55,9 @@ export class ContactAddComponent implements OnInit {
         }
         console.log('creation success!');
       });
+  }
+
+  getFormControl(formControlName: string): FormControl {
+    return this.creationForm.get(formControlName) as FormControl;
   }
 }
