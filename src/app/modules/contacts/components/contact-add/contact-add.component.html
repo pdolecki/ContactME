@@ -1,1 +1,91 @@
-<p>contact-add works</p>
+<div class="background"></div>
+<div class="card">
+  <div class="panel">
+    <div class="panel-title">Create Contact</div>
+    <div class="panel-image"><img src="assets/contact.svg" /></div>
+    <div class="panel-info">
+      Although the required password length is 10 characters, remember that the
+      longer it is, the more secure your data will be.
+    </div>
+  </div>
+  <div class="panel">
+    <form class="panel-form" [formGroup]="creationForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline" class="panel-form--field">
+        <mat-label>Name</mat-label>
+        <input
+          type="text"
+          autocomplete="off"
+          formControlName="name"
+          matInput
+          #name
+        />
+        <button
+          *ngIf="name.value"
+          type="button"
+          (click)="clearFormControl(name)"
+          matSuffix
+          mat-icon-button
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="this.creationForm.get('name')?.errors?.['required']"
+          >You need to provide a name!</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="panel-form--field">
+        <mat-label>Email</mat-label>
+        <input
+          type="text"
+          autocomplete="off"
+          formControlName="email"
+          matInput
+          #email
+        />
+        <button
+          *ngIf="email.value"
+          type="button"
+          (click)="clearFormControl(email)"
+          matSuffix
+          mat-icon-button
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error
+          *ngIf="this.creationForm.get('email')?.errors?.['required'] || this.creationForm.get('email')?.errors?.['pattern']"
+          >You need to provide an email!</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="panel-form--field">
+        <mat-label>Phone Number</mat-label>
+        <input
+          type="text"
+          autocomplete="off"
+          formControlName="phoneNumber"
+          matInput
+          #phoneNumber
+        />
+        <button
+          *ngIf="phoneNumber.value"
+          type="button"
+          (click)="clearFormControl(phoneNumber)"
+          matSuffix
+          mat-icon-button
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error
+          *ngIf="this.creationForm.get('phoneNumber')?.errors?.['required'] || this.creationForm.get('phoneNumber')?.errors?.['pattern']"
+          >You need to provide a phoneNumber!</mat-error
+        >
+      </mat-form-field>
+      <button
+        class="panel-cta--btn"
+        type="submit"
+        color="primary"
+        mat-raised-button
+      >
+        CREATE
+      </button>
+    </form>
+  </div>
+</div>
