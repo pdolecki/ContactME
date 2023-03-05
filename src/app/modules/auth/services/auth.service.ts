@@ -9,7 +9,8 @@ export class AuthService {
   private loggedUserId!: string | null;
   private token!: string | null;
   private tokenTimer!: any;
-  public isUserAuthenticated$ = new BehaviorSubject<boolean>(false);
+
+  isUserAuthenticated$ = new BehaviorSubject<boolean>(false);
 
   constructor(private router: Router, private apiService: ApiService) {}
 

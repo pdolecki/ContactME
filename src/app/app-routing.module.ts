@@ -4,7 +4,6 @@ import { AuthGuard } from './modules/auth/guards/auth.guard';
 import { ContactsComponent } from './modules/contacts/components/contacts/contacts.component';
 
 const routes: Routes = [
-  // { path: 'contacts', component: ContactsComponent, canActivate: [AuthGuard] },
   {
     path: 'contacts',
     loadChildren: () =>

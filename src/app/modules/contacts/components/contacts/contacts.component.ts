@@ -4,6 +4,7 @@ import {
   ChangeDetectionStrategy,
   OnInit,
   ChangeDetectorRef,
+  Type,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,7 +13,6 @@ import { CreateComponent } from 'src/app/shared/components/create/create.compone
 import { DeleteComponent } from 'src/app/shared/components/delete/delete.component';
 import { EditComponent } from 'src/app/shared/components/edit/edit.component';
 import { Contact } from 'src/app/shared/models';
-import { MessageService } from 'src/app/shared/services/message.service';
 import { ContactsService } from '../../services/contacts.service';
 
 @Component({
@@ -23,7 +23,6 @@ import { ContactsService } from '../../services/contacts.service';
 })
 export class ContactsComponent implements OnInit {
   public contacts: Contact[] = [];
-
   public displayedColumns: string[] = [
     'name',
     'phoneNumber',
@@ -38,13 +37,13 @@ export class ContactsComponent implements OnInit {
     private cdr: ChangeDetectorRef
   ) {}
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
   ngOnInit(): void {
     this.fetchContactsData();
+  }
+
+  public applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   private fetchContactsData(): void {

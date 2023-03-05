@@ -16,17 +16,17 @@ import { ApiService } from 'src/app/shared/services/api.service';
 export class ContactsService {
   constructor(private apiService: ApiService) {}
 
-  getContacts(): Observable<GetContactsResponse | HttpErrorResponse> {
+  public getContacts(): Observable<GetContactsResponse | HttpErrorResponse> {
     return this.apiService.get('contacts');
   }
 
-  createContact(
+  public createContact(
     contact: Partial<Contact>
   ): Observable<CreateContactResponse | HttpErrorResponse> {
     return this.apiService.post('contacts', { ...contact });
   }
 
-  updateContact(contact: {
+  public updateContact(contact: {
     id: string;
     email: string;
     name: string;
@@ -35,7 +35,7 @@ export class ContactsService {
     return this.apiService.put(`contacts/${contact.id}`, { ...contact });
   }
 
-  deleteContact(
+  public deleteContact(
     contactId: string
   ): Observable<DeleteContactResponse | HttpErrorResponse> {
     return this.apiService.delete(`contacts/${contactId}`);

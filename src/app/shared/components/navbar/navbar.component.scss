@@ -3,26 +3,21 @@ ul {
   margin: 0;
   padding: 0;
   display: flex;
-
   li {
     margin-right: 10px;
   }
 }
-
 a {
   text-decoration: none;
   color: white;
 }
-
 a:hover,
 button:hover {
   cursor: pointer;
 }
-
 .spacer {
   flex: 1 1 auto;
 }
-
 .title {
   font-size: 22px;
   letter-spacing: 2px;

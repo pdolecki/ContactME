@@ -12,7 +12,7 @@ export class InputComponent {
   @Input() type: string = 'text';
   @Input() control!: FormControl;
 
-  clearInput() {
+  public clearInput(): void {
     this.control.setValue(null);
   }
 }

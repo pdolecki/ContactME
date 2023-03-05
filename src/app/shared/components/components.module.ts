@@ -19,8 +19,6 @@ import { CreateComponent } from './create/create.component';
 import { EditComponent } from './edit/edit.component';
 import { MatSortModule } from '@angular/material/sort';
 import { InputComponent } from './input/input.component';
-import { ThankYouComponent } from './pages/thank-you/thank-you.component';
-import { SomethingWentWrongComponent } from './pages/something-went-wrong/something-went-wrong.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +28,6 @@ import { SomethingWentWrongComponent } from './pages/something-went-wrong/someth
     EditComponent,
     DeleteComponent,
     InputComponent,
-    ThankYouComponent,
-    SomethingWentWrongComponent,
   ],
   imports: [
     CommonModule,
@@ -55,8 +51,6 @@ import { SomethingWentWrongComponent } from './pages/something-went-wrong/someth
     EditComponent,
     DeleteComponent,
     InputComponent,
-    ThankYouComponent,
-    SomethingWentWrongComponent,
   ],
 })
 export class ComponentsModule {}

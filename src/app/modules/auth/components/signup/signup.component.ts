@@ -34,7 +34,7 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  public onSubmit(): void {
     if (this.signupForm.invalid) return;
     this.authService.createUser(
       this.signupForm.value.email,
@@ -42,7 +42,7 @@ export class SignupComponent implements OnInit {
     );
   }
 
-  getFormControl(formControlName: string): FormControl {
+  public getFormControl(formControlName: string): FormControl {
     return this.signupForm.get(formControlName) as FormControl;
   }
 }

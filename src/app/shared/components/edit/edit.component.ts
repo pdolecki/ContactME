@@ -20,8 +20,7 @@ import { Contact } from '../../models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditComponent implements OnInit {
-  public updateForm!: FormGroup;
-
+  updateForm!: FormGroup;
   private name: string;
   private phoneNumber: string;
   private email: string;

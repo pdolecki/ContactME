@@ -1,10 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import {
-  Component,
-  ChangeDetectionStrategy,
-  OnInit,
-  ChangeDetectorRef,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -24,8 +19,7 @@ export class ContactAddComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private contactsService: ContactsService,
-    private cdr: ChangeDetectorRef
+    private contactsService: ContactsService
   ) {}
 
   ngOnInit(): void {
@@ -57,7 +51,7 @@ export class ContactAddComponent implements OnInit {
       });
   }
 
-  getFormControl(formControlName: string): FormControl {
+  public getFormControl(formControlName: string): FormControl {
     return this.creationForm.get(formControlName) as FormControl;
   }
 }

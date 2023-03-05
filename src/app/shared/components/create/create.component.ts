@@ -38,7 +38,7 @@ export class CreateComponent implements OnInit {
     });
   }
 
-  getFormControl(formControlName: string): FormControl {
+  public getFormControl(formControlName: string): FormControl {
     return this.creationForm.get(formControlName) as FormControl;
   }
 
