@@ -12,6 +12,7 @@ import { CreateComponent } from 'src/app/shared/components/create/create.compone
 import { DeleteComponent } from 'src/app/shared/components/delete/delete.component';
 import { EditComponent } from 'src/app/shared/components/edit/edit.component';
 import { Contact } from 'src/app/shared/models';
+import { MessageService } from 'src/app/shared/services/message.service';
 import { ContactsService } from '../../services/contacts.service';
 
 @Component({
