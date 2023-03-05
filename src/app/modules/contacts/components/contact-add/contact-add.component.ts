@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { take } from 'rxjs';
 import { LoaderService } from 'src/app/shared/services/loader.service';
 import { MessageService } from 'src/app/shared/services/message.service';
@@ -24,7 +25,8 @@ export class ContactAddComponent implements OnInit {
     private formBuilder: FormBuilder,
     private contactsService: ContactsService,
     private loaderService: LoaderService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -60,6 +62,7 @@ export class ContactAddComponent implements OnInit {
           return;
         }
         this.messageService.openMessage('Contact created successfully!');
+        this.router.navigateByUrl('contacts');
         this.loaderService.disableLoader();
       });
   }

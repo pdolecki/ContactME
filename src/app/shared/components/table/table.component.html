@@ -65,8 +65,6 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
   <tr class="mat-row" *matNoDataRow>
-    <td class="mat-cell" colspan="4">
-      No data matching the filter "{{ filterValue }}"
-    </td>
+    <td class="mat-cell" colspan="4">No matching data found</td>
   </tr>
 </table>
