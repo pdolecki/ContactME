@@ -27,7 +27,9 @@
         </button>
       </form>
       <mat-card-footer>
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        <mat-progress-bar
+          [mode]="authService.isLoading ? 'indeterminate' : 'determinate'"
+        ></mat-progress-bar>
       </mat-card-footer>
     </mat-card>
     <button class="redirect" routerLink="/auth/signup">

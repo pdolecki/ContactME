@@ -6,6 +6,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { take } from 'rxjs';
+import { LoaderService } from 'src/app/shared/services/loader.service';
+import { MessageService } from 'src/app/shared/services/message.service';
 import { ContactsService } from '../../services/contacts.service';
 
 @Component({
@@ -19,7 +22,9 @@ export class ContactAddComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private contactsService: ContactsService
+    private contactsService: ContactsService,
+    private loaderService: LoaderService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -40,14 +45,22 @@ export class ContactAddComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    if (this.creationForm.invalid) return;
+    if (this.creationForm.invalid) {
+      this.messageService.openMessage('Form needs to be filled up corectlly!');
+      return;
+    }
+    this.loaderService.enableLoader();
     this.contactsService
       .createContact(this.creationForm.value)
+      .pipe(take(1))
       .subscribe((res) => {
         if (res instanceof HttpErrorResponse) {
-          return console.log('ERROR');
+          this.loaderService.disableLoader();
+          this.messageService.openMessage(res.message);
+          return;
         }
-        console.log('creation success!');
+        this.messageService.openMessage('Contact created successfully!');
+        this.loaderService.disableLoader();
       });
   }
 

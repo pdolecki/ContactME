@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { AuthData } from 'src/app/shared/models';
 import { ApiService } from 'src/app/shared/services/api.service';
+import { MessageService } from 'src/app/shared/services/message.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -11,8 +12,13 @@ export class AuthService {
   private tokenTimer!: any;
 
   isUserAuthenticated$ = new BehaviorSubject<boolean>(false);
+  isLoading = false;
 
-  constructor(private router: Router, private apiService: ApiService) {}
+  constructor(
+    private router: Router,
+    private apiService: ApiService,
+    private messageService: MessageService
+  ) {}
 
   get jwtToken(): string | null {
     return this.token;
@@ -23,17 +29,26 @@ export class AuthService {
   }
 
   public createUser(email: string, password: string): Subscription {
+    this.isLoading = true;
     return this.apiService.post('signup', { email, password }).subscribe(
       () => {
+        this.messageService.openMessage(
+          'User created successfully, please log in'
+        );
         this.router.navigate(['/auth/login']);
       },
-      () => {
+      (err) => {
+        this.messageService.openMessage(err.msg);
         this.isUserAuthenticated$.next(false);
+      },
+      () => {
+        this.isLoading = false;
       }
     );
   }
 
   public login(email: string, password: string): void {
+    this.isLoading = true;
     this.apiService.post('login', { email, password }).subscribe(
       (response) => {
         if (!response.token) return;
@@ -52,8 +67,12 @@ export class AuthService {
         this.saveAuthData(response.token, expirationDate, response.userId);
         this.router.navigate(['/contacts']);
       },
-      () => {
+      (err) => {
+        this.messageService.openMessage(err.msg);
         this.isUserAuthenticated$.next(false);
+      },
+      () => {
+        this.isLoading = false;
       }
     );
   }
@@ -68,7 +87,12 @@ export class AuthService {
     const now = new Date();
     const expiresIn = authInformation.expirationDate.getTime() - now.getTime();
 
-    if (expiresIn <= 0) return;
+    if (expiresIn <= 0) {
+      this.messageService.openMessage(
+        'Session has expired, please log in again'
+      );
+      return;
+    }
 
     this.token = authInformation.token;
     this.loggedUserId = authInformation.userId;

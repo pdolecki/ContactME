@@ -1,0 +1,12 @@
+<ng-container
+  *ngIf="{
+    loadingActive: loadingActive$ | async
+  } as asyncData"
+>
+  <div *ngIf="asyncData.loadingActive" class="loader">
+    <mat-spinner color="accent" strokeWidth="7" [diameter]="150"></mat-spinner>
+    <div class="content">
+      <p>loading</p>
+    </div>
+  </div>
+</ng-container>

@@ -13,6 +13,8 @@ import { CreateComponent } from 'src/app/shared/components/create/create.compone
 import { DeleteComponent } from 'src/app/shared/components/delete/delete.component';
 import { EditComponent } from 'src/app/shared/components/edit/edit.component';
 import { Contact } from 'src/app/shared/models';
+import { LoaderService } from 'src/app/shared/services/loader.service';
+import { MessageService } from 'src/app/shared/services/message.service';
 import { ContactsService } from '../../services/contacts.service';
 
 @Component({
@@ -34,7 +36,9 @@ export class ContactsComponent implements OnInit {
   constructor(
     private contactsService: ContactsService,
     private matDialog: MatDialog,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private loaderService: LoaderService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -47,32 +51,43 @@ export class ContactsComponent implements OnInit {
   }
 
   private fetchContactsData(): void {
+    this.loaderService.enableLoader();
     this.contactsService
       .getContacts()
       .pipe(take(1))
       .subscribe((res) => {
         if (res instanceof HttpErrorResponse) {
-          return console.log('ERROR');
+          this.loaderService.disableLoader();
+          this.messageService.openMessage(res.message);
+          return;
         }
         this.contacts = res.contacts;
         this.dataSource = new MatTableDataSource(this.contacts);
         this.cdr.detectChanges();
+        this.loaderService.disableLoader();
       });
   }
 
   public openCreateDialog(): void {
     const dialogRef = this.matDialog.open(CreateComponent);
-
-    dialogRef.afterClosed().subscribe((newContact) => {
-      if (!newContact) return;
-      this.contactsService.createContact(newContact).subscribe((res) => {
-        if (res instanceof HttpErrorResponse) {
-          return console.log('ERROR');
-        }
-        console.log('creation success!');
-        this.fetchContactsData();
+    dialogRef
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((newContact) => {
+        if (!newContact) return;
+        this.contactsService
+          .createContact(newContact)
+          .pipe(take(1))
+          .subscribe((res) => {
+            if (res instanceof HttpErrorResponse) {
+              this.loaderService.disableLoader();
+              this.messageService.openMessage(res.message);
+              return;
+            }
+            this.messageService.openMessage('Contact created successfully!');
+            this.fetchContactsData();
+          });
       });
-    });
   }
 
   public openEditDialog(contactId: Pick<Contact, '_id'>): void {
@@ -84,18 +99,24 @@ export class ContactsComponent implements OnInit {
       data: { contact },
     });
 
-    dialogRef.afterClosed().subscribe((updatedContact) => {
-      if (!updatedContact || !contact) return;
-      this.contactsService
-        .updateContact({ id: contact._id, ...updatedContact })
-        .subscribe((res) => {
-          if (res instanceof HttpErrorResponse) {
-            return console.log('ERROR');
-          }
-          console.log('update success!');
-          this.fetchContactsData();
-        });
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((updatedContact) => {
+        if (!updatedContact || !contact) return;
+        this.contactsService
+          .updateContact({ id: contact._id, ...updatedContact })
+          .pipe(take(1))
+          .subscribe((res) => {
+            if (res instanceof HttpErrorResponse) {
+              this.loaderService.disableLoader();
+              this.messageService.openMessage(res.message);
+              return;
+            }
+            this.messageService.openMessage('Contact updated successfully!');
+            this.fetchContactsData();
+          });
+      });
   }
 
   public openDeleteDialog(contactId: Pick<Contact, '_id'>): void {
@@ -113,15 +134,20 @@ export class ContactsComponent implements OnInit {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (!result || !contact) return;
-      this.contactsService.deleteContact(contact._id).subscribe((res) => {
-        if (res instanceof HttpErrorResponse) {
-          return console.log('ERROR');
-        }
-        console.log('deletetion success!');
-        this.fetchContactsData();
+    dialogRef
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((result) => {
+        if (!result || !contact) return;
+        this.contactsService.deleteContact(contact._id).subscribe((res) => {
+          if (res instanceof HttpErrorResponse) {
+            this.loaderService.disableLoader();
+            this.messageService.openMessage(res.message);
+            return;
+          }
+          this.messageService.openMessage('Contact updated successfully!');
+          this.fetchContactsData();
+        });
       });
-    });
   }
 }

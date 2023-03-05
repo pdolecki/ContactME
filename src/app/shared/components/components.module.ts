@@ -11,6 +11,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { TableComponent } from './table/table.component';
@@ -19,6 +20,7 @@ import { CreateComponent } from './create/create.component';
 import { EditComponent } from './edit/edit.component';
 import { MatSortModule } from '@angular/material/sort';
 import { InputComponent } from './input/input.component';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { InputComponent } from './input/input.component';
     EditComponent,
     DeleteComponent,
     InputComponent,
+    LoaderComponent,
   ],
   imports: [
     CommonModule,
@@ -43,6 +46,7 @@ import { InputComponent } from './input/input.component';
     MatTableModule,
     MatInputModule,
     MatSortModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     NavbarComponent,
@@ -51,6 +55,7 @@ import { InputComponent } from './input/input.component';
     EditComponent,
     DeleteComponent,
     InputComponent,
+    LoaderComponent,
   ],
 })
 export class ComponentsModule {}

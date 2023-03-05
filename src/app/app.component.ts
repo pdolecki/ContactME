@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AuthService } from './modules/auth/services/auth.service';
+import { LoaderService } from './shared/services/loader.service';
 
 @Component({
   selector: 'cme-root',

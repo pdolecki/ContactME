@@ -29,7 +29,7 @@
       <mat-card-footer>
         <mat-progress-bar
           color="accent"
-          mode="indeterminate"
+          [mode]="authService.isLoading ? 'indeterminate' : 'determinate'"
         ></mat-progress-bar>
       </mat-card-footer>
     </mat-card>
