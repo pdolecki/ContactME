@@ -17,6 +17,7 @@ import { TableComponent } from './table/table.component';
 import { DeleteComponent } from './delete/delete.component';
 import { CreateComponent } from './create/create.component';
 import { EditComponent } from './edit/edit.component';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { EditComponent } from './edit/edit.component';
     MatDialogModule,
     MatTableModule,
     MatInputModule,
+    MatSortModule,
   ],
   exports: [
     NavbarComponent,
